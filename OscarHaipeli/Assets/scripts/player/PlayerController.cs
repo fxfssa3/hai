@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
-
+    public Transform gunTranform;
     public float moveSpeed = 5f;
 
     private Master controls;
@@ -24,11 +24,20 @@ public class PlayerController : MonoBehaviour
         controls.Disable();
     }
     // Start is called before the first frame update
-    void Start()
+    void Update()
     {
-        
+      Shoot();  
     }
-
+    
+    void Shoot()
+    {
+        if(controls.player.fire.triggered){
+        Debug.Log("ampuu");
+        GameObject bullet = ammusPoolManager.Instance.GetBullet();
+        bullet.transform.position = gunTranform.position;
+        bullet.transform.rotation = gunTranform.rotation;
+        }
+    }
     // Update is called once per frame
     void FixedUpdate()
     {
